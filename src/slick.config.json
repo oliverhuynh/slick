@@ -1,0 +1,17 @@
+[
+  "[id^='block-homepagenewsandevents'] [id^='block-views-block-news-feed-block-2'] .view > .view-content",
+  "[id^='block-homepagenewsandevents'] [id^='block-views-block-events-feed-block-2'] .view > .view-content",
+  {
+    "select": ".hapm_video_gallery .paragraph--type--video-gallery .field--name-field-videoitem > .field__items",
+    "infinite": false,
+    "speed": 300,
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "arrows": false,
+    "dots": true,
+    "desktop": {
+      "slidesToShow": 2,
+      "slidesToScroll": 2
+    }
+  }
+]

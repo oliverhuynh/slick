@@ -1,0 +1,17 @@
+{
+  "name": "slick",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/slick.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "responsive": "git+https://github.com/oliverhuynh/responsive.git"
+  }
+}
