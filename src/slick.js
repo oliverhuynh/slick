@@ -1,4 +1,7 @@
+let i=0;
 export const init = (config) => {
+  i++;
+
   const json = config
     .map((select) => (typeof select === 'string' ? { select } : select))
     .map((select) => ({
@@ -15,7 +18,7 @@ export const init = (config) => {
     .reduce((o, { select, ...i }) => ({ ...o, ...{ [select]: i } }), {});
   (function ($, Drupal, drupalSettings) {
     /* ELEMENT: SLICK */
-    Drupal.behaviors.haclaslick = {
+    Drupal.behaviors[`haclaslick_${i}`] = {
       doslick: function (options) {
         this.not('.slick-initialized').slick(options);
       },
