@@ -2,7 +2,8 @@ let i=0;
 export const init = (config) => {
   i++;
 
-  const json = config
+  (function ($, Drupal, drupalSettings) {
+  let json = config
     .map((select) => (typeof select === 'string' ? { select } : select))
     .map((select) => ({
       ...{
@@ -11,12 +12,24 @@ export const init = (config) => {
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
+        customPaging: false,
         dots: true
       },
       ...select
-    }))
-    .reduce((o, { select, ...i }) => ({ ...o, ...{ [select]: i } }), {});
-  (function ($, Drupal, drupalSettings) {
+    })).map((select) => {
+      // Add my special paging
+      if (select.customPaging) {
+        select.customPaging = function(slider, i) {
+          // Ensure first
+          // Ignore toofar active
+          return $('<button hacked type="button" />').text(i + 1);
+          // Ensure last
+        };
+      }
+      return select;
+    }).reduce((o, { select, ...i }) => ({ ...o, ...{ [select]: i } }), {});
+
+
     /* ELEMENT: SLICK */
     Drupal.behaviors[`haclaslick_${i}`] = {
       doslick: function (options) {
