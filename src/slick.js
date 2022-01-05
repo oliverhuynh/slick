@@ -19,11 +19,20 @@ export const init = (config) => {
     })).map((select) => {
       // Add my special paging
       if (select.customPaging) {
-        select.customPaging = function(slider, i) {
+        select.customPaging = function(_, i) {
+          let text = i+1;
           // Ensure first
+          if (i === 0) {
+            
+          }
+
           // Ignore toofar active
-          return $('<button hacked type="button" />').text(i + 1);
           // Ensure last
+          if (_.getDotCount() === i) {
+            text = 'Last';
+          }
+
+          return $('<button hacked type="button" />').text(text);
         };
       }
       return select;
