@@ -42,6 +42,13 @@ export const init = (config) => {
     /* ELEMENT: SLICK */
     Drupal.behaviors[`haclaslick_${i}`] = {
       doslick: function (options) {
+        const s = options.slidesToShow || 1;
+        const r = options.rows || 1;
+        const total = s * r;
+        // Skip slick if chilren is not enough
+        if (this.children().length <= total) {
+          return ;
+        }
         this.not('.slick-initialized').slick(options);
       },
       attach: function attach(context) {
