@@ -58,25 +58,21 @@ export const init = (config) => {
         // My responsive slick
         for (const sl of Object.keys(select)) {
           for (const o of $(context).find(sl).once('sla').toArray()) {
-            const { desktop = false, ...selectobj } = select[sl];
-            $(window).on('toMobile', () => {
-              try {
-                if (desktop) {
+            const { smallMobile={}, desktop = {}, ...selectobj } = select[sl];
+            const settings = {
+              'toMobile': selectobj,
+              'toWeb': { ...selectobj, ...desktop },
+              'toSmallMobile': { ...selectobj, ...smallMobile }
+            };
+            for (const k of settings) {
+              $(window).on(k, () => {
+                try {
                   $(o).slick('unslick');
-                }
-              } catch (e) {}
+                } catch (e) {}
 
-              t.doslick.bind($(o))(selectobj);
-            });
-            $(window).on('toWeb', () => {
-              try {
-                $(o).slick('unslick');
-              } catch (e) {}
-
-              if (desktop) {
-                t.doslick.bind($(o))({ ...selectobj, ...desktop });
-              }
-            });
+                t.doslick.bind($(o))(settings[k]);
+              });
+            }
           }
         }
       }
