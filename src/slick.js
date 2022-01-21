@@ -64,7 +64,7 @@ export const init = (config) => {
               'toWeb': { ...selectobj, ...desktop },
               'toSmallMobile': { ...selectobj, ...smallMobile }
             };
-            for (const k of settings) {
+            for (const k of Object.keys(settings)) {
               $(window).on(k, () => {
                 try {
                   $(o).slick('unslick');
